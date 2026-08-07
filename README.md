@@ -1,14 +1,48 @@
-# BillDog Android SDK — Full
+# BillDog Android SDK
 
-All-in-one **Monetization, Engagement, and Data** platform for Android. This registry hosts the **compiled AAR artifacts** (no source) for the full BillDog SDK, distributed via **GitHub Packages (Maven)**.
+![Version](https://img.shields.io/badge/version-1.0.0--beta.2-blue)
+![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
+![minSdk](https://img.shields.io/badge/minSdk-21-orange)
+![Distribution](https://img.shields.io/badge/Maven-GitHub%20Packages-24292e?logo=github)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-> **Version:** `1.0.0-beta.2`  ·  **Group:** `io.billdog`
+**BillDog** is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
+
+> This registry hosts the **compiled AAR artifacts** (closed source) for the **full** BillDog SDK, distributed via **GitHub Packages (Maven)** under the `io.billdog` group at version **`1.0.0-beta.2`**.
+>
+> Looking for the Eng edition? See **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**.
 
 ---
 
-## 1. Repository setup
+## 🏗️ Architecture
 
-GitHub Packages requires authentication **even to download**. Create a GitHub **Personal Access Token** with the `read:packages` scope, then add the registry to your `settings.gradle.kts` (or `settings.gradle`):
+BillDog uses a **highly modular architecture** — pull in only what you need to keep your app binary lean (e.g. `billdog-compose` for paywalls, or specific modules for surveys and analytics).
+
+```text
+billdog                  → Full-suite umbrella; bundles the core modules in one dependency
+billdog-core             → Shared foundation, customer identity, and custom billing APIs
+billdog-paywall          → Paywall presentation engine and offer/product resolution
+billdog-compose          → Jetpack Compose native paywall renderer
+billdog-webview          → Fallback HTML/CSS paywall renderer
+billdog-analytics        → Event tracking, autocapture, and user property updates
+billdog-ab-test          → Experiment assignment and A/B testing
+billdog-caching          → Offline caching of offerings and API responses
+billdog-replay           → Screenshot-based session replay with privacy masking
+billdog-survey           → Headless survey engine with branching logic
+billdog-survey-compose   → Jetpack Compose survey UI
+billdog-inappmessages    → Trigger-based in-app banners, dialogs, and modals
+billdog-notifications    → Push notification manager & deep-link routing
+billdog-virtual-currency → Server-synced wallet balance and drops
+billdog-bom              → Bill of Materials for version alignment
+```
+
+---
+
+## 🚀 Installation
+
+### 1. Add the registry
+
+GitHub Packages requires authentication **even to download**. Create a GitHub **Personal Access Token** with the **`read:packages`** scope, then register the repository in your `settings.gradle.kts`:
 
 ```kotlin
 dependencyResolutionManagement {
@@ -26,14 +60,14 @@ dependencyResolutionManagement {
 }
 ```
 
-Put your credentials in `~/.gradle/gradle.properties` (never commit them):
+Store credentials in `~/.gradle/gradle.properties` (never commit them):
 
 ```properties
 gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_GITHUB_PAT_WITH_read:packages
+gpr.key=YOUR_GITHUB_PAT_WITH_read_packages
 ```
 
-## 2. Add dependencies
+### 2. Declare dependencies
 
 ```kotlin
 dependencies {
@@ -50,7 +84,9 @@ dependencies {
 }
 ```
 
-Prefer centralized versions? Import the BOM and omit versions on the modules:
+### 3. (Optional) Use the BOM
+
+Import the BOM to align all module versions and omit them on each dependency:
 
 ```kotlin
 dependencies {
@@ -62,29 +98,80 @@ dependencies {
 
 ---
 
-## Available modules
+## ⚡ Quick start
 
-| Artifact | Description |
-|---|---|
-| `billdog` | Full-suite umbrella (bundles the core modules) |
-| `billdog-core` | Foundational identity + billing APIs |
-| `billdog-paywall` | Paywall engine |
-| `billdog-compose` | Native Jetpack Compose paywall renderer |
-| `billdog-webview` | HTML/CSS fallback renderer |
-| `billdog-analytics` | Event tracking + user properties |
-| `billdog-ab-test` | Experiments / A-B testing |
-| `billdog-caching` | Offline + response caching |
-| `billdog-replay` | Session replay with privacy masking |
-| `billdog-survey` / `billdog-survey-compose` | Survey engine + Compose UI |
-| `billdog-inappmessages` | Trigger-based in-app messaging |
-| `billdog-notifications` | Push notification management |
-| `billdog-virtual-currency` | Server-synced wallet |
-| `billdog-bom` | Bill of Materials (version alignment) |
+Initialize once, in your `Application`:
 
-> **Eng edition?** The `io.billdog:billdog-eng` suite lives in a separate registry:
-> [`billdog-android-eng`](https://github.com/billdogai/billdog-android-eng). It resolves its
-> shared dependencies from **this** repository, so eng consumers add **both** Maven URLs.
+```kotlin
+import android.app.Application
+import io.billdog.core.BillDog
+
+class MyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        BillDog.configure(this, "YOUR_API_KEY")
+    }
+}
+```
+
+Then, anywhere in your app:
+
+```kotlin
+// Track a product / analytics event
+BillDog.trackEvent("checkout_started", mapOf("plan" to "pro"))
+
+// Read entitlements for a product
+val entitlements = BillDog.entitlementsForProduct("premium_monthly")
+
+// Preload paywalls for snappy presentation
+BillDog.preloadPaywalls(listOf("onboarding", "settings_upsell"))
+
+// End the session / clear identity
+BillDog.logOut()
+BillDog.reset()
+```
+
+Paywalls render through **`billdog-compose`** (the `PaywallScreen` composable / `presentPaywall(...)`) or the **`billdog-webview`** fallback renderer.
 
 ---
 
-_Artifacts are compiled AARs; source is not distributed. © BillDog._
+## ✅ Requirements
+
+- **minSdk 21** (Android 5.0+)
+- **Java 17** toolchain
+- Jetpack Compose (for `billdog-compose` / `billdog-survey-compose`)
+
+---
+
+## 📦 Modules at a glance
+
+| Artifact | Purpose |
+|---|---|
+| `billdog` | Full-suite umbrella |
+| `billdog-core` | Identity + billing foundation |
+| `billdog-paywall` | Paywall engine |
+| `billdog-compose` | Compose paywall renderer |
+| `billdog-webview` | HTML/CSS paywall renderer |
+| `billdog-analytics` | Events + user properties |
+| `billdog-ab-test` | A/B testing |
+| `billdog-caching` | Offline caching |
+| `billdog-replay` | Session replay |
+| `billdog-survey` / `billdog-survey-compose` | Surveys (engine + UI) |
+| `billdog-inappmessages` | In-app messaging |
+| `billdog-notifications` | Push notifications |
+| `billdog-virtual-currency` | Virtual currency wallet |
+| `billdog-bom` | Version alignment |
+
+---
+
+## 🔗 Eng edition
+
+The `io.billdog:billdog-eng` suite is published separately at **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**. It resolves its shared dependencies from **this** registry, so Eng consumers add **both** Maven URLs. `billdog-eng` and the full `billdog` umbrella are mutually exclusive — use one or the other.
+
+---
+
+## 📄 License
+
+MIT — see the published POM metadata. Artifacts are compiled AARs; **source is not distributed**.
+
+<sub>© BillDog.io</sub>
