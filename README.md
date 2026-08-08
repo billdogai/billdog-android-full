@@ -3,12 +3,12 @@
 ![Version](https://img.shields.io/badge/version-1.0.0--beta.2-blue)
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
 ![minSdk](https://img.shields.io/badge/minSdk-21-orange)
-![Distribution](https://img.shields.io/badge/Maven-GitHub%20Packages-24292e?logo=github)
+![Maven Central](https://img.shields.io/badge/Maven%20Central-io.billdog-blue?logo=apachemaven)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 **BillDog** is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
 
-> This registry hosts the **compiled AAR artifacts** (closed source) for the **full** BillDog SDK, distributed via **GitHub Packages (Maven)** under the `io.billdog` group at version **`1.0.0-beta.2`**.
+> The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.0.0-beta.2`** — no account or token required.
 >
 > Looking for the Eng edition? See **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**.
 
@@ -42,29 +42,15 @@ billdog-bom              → Bill of Materials for version alignment
 
 ### 1. Add the registry
 
-GitHub Packages requires authentication **even to download**. Create a GitHub **Personal Access Token** with the **`read:packages`** scope, then register the repository in your `settings.gradle.kts`:
+The SDK is on **Maven Central** — no account, credentials, or token required. Just make sure `mavenCentral()` is in your `settings.gradle.kts` (it is by default in new Android Studio projects):
 
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/billdogai/billdog-android-full")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
-                password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
     }
 }
-```
-
-Store credentials in `~/.gradle/gradle.properties` (never commit them):
-
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_GITHUB_PAT_WITH_read_packages
 ```
 
 ### 2. Declare dependencies
@@ -95,6 +81,27 @@ dependencies {
     implementation("io.billdog:billdog-analytics")
 }
 ```
+
+<details>
+<summary>Alternative: GitHub Packages</summary>
+<br>
+
+The same artifacts are also mirrored to this repo's GitHub Packages registry. It requires a GitHub Personal Access Token with `read:packages` even to download, so **Maven Central above is the recommended path**. If you specifically need the GitHub Packages mirror:
+
+```kotlin
+// settings.gradle.kts
+maven {
+    url = uri("https://maven.pkg.github.com/billdogai/billdog-android-full")
+    credentials {
+        username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
+        password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN")
+    }
+}
+```
+
+with `gpr.user` / `gpr.key` (your PAT) in `~/.gradle/gradle.properties`.
+
+</details>
 
 ---
 
