@@ -37,6 +37,23 @@ billdog-virtual-currency → Server-synced wallet balance and drops
 billdog-bom              → Bill of Materials for version alignment
 ```
 
+### Capability matrix
+
+| Capability | `billdog` (Full) | `billdog-eng` |
+| :--- | :---: | :---: |
+| **Core** — configuration, identity, consent, custom billing | ✅ | ✅ |
+| **Auth** — authentication, hosted auth cards, sessions, and token refresh | ✅ | ✅ |
+| **Paywall** — Jetpack Compose native paywall rendering + billing | ✅ | ❌ |
+| **Caching** — offline-first paywall/survey/asset cache | ✅ | ❌ |
+| **WebView** — HTML/CSS paywall renderer fallback | ✅ | ❌ |
+| **Survey** — in-app surveys with branching logic | ✅ | ✅ |
+| **Analytics** — events, autocapture, super properties, user properties | ✅ | ✅ |
+| **Session Replay** — screenshot-based replay with privacy masking | ✅ | ✅ |
+| **A/B Test & Feature Flags** — experiments and flag resolution | ✅ | ✅ |
+| **Notifications** — push tokens, consent, deep links | ✅ | ✅ |
+| **In-App Messages** — trigger-based modals and banners | ✅ | ✅ |
+| **Virtual Currency** — server-synced wallet balances | ✅ | ❌ |
+
 ---
 
 ## 🚀 Installation
