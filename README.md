@@ -1,6 +1,6 @@
 # BillDog Android SDK
 
-![Version](https://img.shields.io/badge/version-1.0.0--beta.2-blue)
+![Version](https://img.shields.io/badge/version-1.1.0--beta.3-blue)
 ![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white)
 ![minSdk](https://img.shields.io/badge/minSdk-21-orange)
 ![Maven Central](https://img.shields.io/badge/Maven%20Central-io.billdog-blue?logo=apachemaven)
@@ -8,7 +8,7 @@
 
 **BillDog** is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
 
-> The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.0.0-beta.2`** — no account or token required.
+> The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.1.0-beta.3`** — no account or token required.
 >
 > Looking for the Eng edition? See **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**.
 
@@ -21,6 +21,7 @@ BillDog uses a **highly modular architecture** — pull in only what you need to
 ```text
 billdog                  → Full-suite umbrella; bundles the core modules in one dependency
 billdog-core             → Shared foundation, customer identity, and custom billing APIs
+billdog-auth             → Native auth, hosted auth cards, and session management
 billdog-paywall          → Paywall presentation engine and offer/product resolution
 billdog-compose          → Jetpack Compose native paywall renderer
 billdog-webview          → Fallback HTML/CSS paywall renderer
@@ -58,15 +59,16 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     // Core + native Compose paywalls (pulls in billdog-core automatically)
-    implementation("io.billdog:billdog-compose:1.0.0-beta.2")
+    implementation("io.billdog:billdog-compose:1.1.0-beta.3")
 
     // Optional feature modules
-    implementation("io.billdog:billdog-analytics:1.0.0-beta.2")
-    implementation("io.billdog:billdog-replay:1.0.0-beta.2")
-    implementation("io.billdog:billdog-survey-compose:1.0.0-beta.2")
-    implementation("io.billdog:billdog-inappmessages:1.0.0-beta.2")
-    implementation("io.billdog:billdog-notifications:1.0.0-beta.2")
-    implementation("io.billdog:billdog-virtual-currency:1.0.0-beta.2")
+    implementation("io.billdog:billdog-auth:1.1.0-beta.3")
+    implementation("io.billdog:billdog-analytics:1.1.0-beta.3")
+    implementation("io.billdog:billdog-replay:1.1.0-beta.3")
+    implementation("io.billdog:billdog-survey-compose:1.1.0-beta.3")
+    implementation("io.billdog:billdog-inappmessages:1.1.0-beta.3")
+    implementation("io.billdog:billdog-notifications:1.1.0-beta.3")
+    implementation("io.billdog:billdog-virtual-currency:1.1.0-beta.3")
 }
 ```
 
@@ -76,7 +78,7 @@ Import the BOM to align all module versions and omit them on each dependency:
 
 ```kotlin
 dependencies {
-    implementation(platform("io.billdog:billdog-bom:1.0.0-beta.2"))
+    implementation(platform("io.billdog:billdog-bom:1.1.0-beta.3"))
     implementation("io.billdog:billdog-compose")
     implementation("io.billdog:billdog-analytics")
 }
@@ -156,6 +158,7 @@ Paywalls render through **`billdog-compose`** (the `PaywallScreen` composable / 
 |---|---|
 | `billdog` | Full-suite umbrella |
 | `billdog-core` | Identity + billing foundation |
+| `billdog-auth` | Native authentication and session management |
 | `billdog-paywall` | Paywall engine |
 | `billdog-compose` | Compose paywall renderer |
 | `billdog-webview` | HTML/CSS paywall renderer |
