@@ -12,7 +12,7 @@
 
 **BillDog** is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
 
-> The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.1.1-beta.4`** — no account or token required.
+> The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.1.1-beta.5`** — no account or token required.
 >
 > Looking for the Eng edition? See **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**.
 
@@ -80,16 +80,16 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     // Core + native Compose paywalls (pulls in billdog-core automatically)
-    implementation("io.billdog:billdog-compose:1.1.1-beta.4")
+    implementation("io.billdog:billdog-compose:1.1.1-beta.5")
 
     // Optional feature modules
-    implementation("io.billdog:billdog-auth:1.1.1-beta.4")
-    implementation("io.billdog:billdog-analytics:1.1.1-beta.4")
-    implementation("io.billdog:billdog-replay:1.1.1-beta.4")
-    implementation("io.billdog:billdog-survey-compose:1.1.1-beta.4")
-    implementation("io.billdog:billdog-inappmessages:1.1.1-beta.4")
-    implementation("io.billdog:billdog-notifications:1.1.1-beta.4")
-    implementation("io.billdog:billdog-virtual-currency:1.1.1-beta.4")
+    implementation("io.billdog:billdog-auth:1.1.1-beta.5")
+    implementation("io.billdog:billdog-analytics:1.1.1-beta.5")
+    implementation("io.billdog:billdog-replay:1.1.1-beta.5")
+    implementation("io.billdog:billdog-survey-compose:1.1.1-beta.5")
+    implementation("io.billdog:billdog-inappmessages:1.1.1-beta.5")
+    implementation("io.billdog:billdog-notifications:1.1.1-beta.5")
+    implementation("io.billdog:billdog-virtual-currency:1.1.1-beta.5")
 }
 ```
 
@@ -99,7 +99,7 @@ Import the BOM to align all module versions and omit them on each dependency:
 
 ```kotlin
 dependencies {
-    implementation(platform("io.billdog:billdog-bom:1.1.1-beta.4"))
+    implementation(platform("io.billdog:billdog-bom:1.1.1-beta.5"))
     implementation("io.billdog:billdog-compose")
     implementation("io.billdog:billdog-analytics")
 }
