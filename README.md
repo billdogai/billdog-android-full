@@ -9,8 +9,9 @@
 ![minSdk](https://img.shields.io/badge/minSdk-21-orange)
 ![Maven Central](https://img.shields.io/badge/Maven%20Central-io.billdog-blue?logo=apachemaven)
 ![License](https://img.shields.io/badge/license-MIT-green)
+[![Docs](https://img.shields.io/badge/docs-billdog.io%2Fdocs%2Fandroid-black)](https://billdog.io/docs/android)
 
-**BillDog** is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
+[**BillDog**](https://billdog.io) is an all-in-one **Monetization, Engagement, and Data** platform built for mobile applications. It combines **Paywalls & Billing**, **Product Analytics**, **In-App Messaging**, and **Surveys** into a single, modular package.
 
 > The **full** BillDog SDK (compiled AAR artifacts, closed source) is published to **Maven Central** under the `io.billdog` group at version **`1.1.1-beta.5`** — no account or token required.
 >
@@ -200,6 +201,33 @@ Paywalls render through **`billdog-compose`** (the `PaywallScreen` composable / 
 The `io.billdog:billdog-eng` suite is published separately at **[billdog-android-eng](https://github.com/billdogai/billdog-android-eng)**. It resolves its shared dependencies from **this** registry, so Eng consumers add **both** Maven URLs. `billdog-eng` and the full `billdog` umbrella are mutually exclusive — use one or the other.
 
 ---
+
+## Documentation and resources
+
+- [Android SDK guide](https://billdog.io/docs/android) — install, configure and ship the full SDK
+- [Android Eng SDK guide](https://billdog.io/docs/android-eng) — analytics, flags, surveys and messaging without billing
+- [Quickstart](https://billdog.io/docs/quickstart)
+- [Google Play Console setup](https://billdog.io/docs/play-store-setup) — service account, RTDN, products
+- [Paywall builder](https://billdog.io/docs/paywall-builder) — native paywalls without an app release
+- [A/B experiments](https://billdog.io/docs/experiments)
+- [Product analytics](https://billdog.io/docs/product-analytics)
+- [Feature flags](https://billdog.io/docs/feature-flags)
+- [Session replay](https://billdog.io/docs/session-replay)
+- [Migrating from RevenueCat](https://billdog.io/vs/revenuecat)
+- [Support](https://billdog.io/support) — questions, bugs and feature requests
+
+## Other BillDog SDKs
+
+| Platform | Package | Docs |
+|---|---|---|
+| iOS (Swift) | [billdog-ios-spm](https://github.com/billdogai/billdog-ios-spm) | [iOS guide](https://billdog.io/docs/ios) |
+| Android (Kotlin) | [billdog-android-full](https://github.com/billdogai/billdog-android-full) · [billdog-android-eng](https://github.com/billdogai/billdog-android-eng) | [Android guide](https://billdog.io/docs/android) |
+| React Native · Flutter · Web | npm · pub.dev | [React Native](https://billdog.io/docs/react-native) · [Flutter](https://billdog.io/docs/flutter) · [Web](https://billdog.io/docs/web) |
+| Superwall bridge (iOS) | [billdog-ios-superwall](https://github.com/billdogai/billdog-ios-superwall) | [Superwall integration](https://billdog.io/docs/superwall-integration) |
+| Server (Go, PHP, Node, Python…) | [billdogeng-go](https://github.com/billdogai/billdogeng-go) · [billdogeng-php](https://github.com/billdogai/billdogeng-php) | [Server SDKs](https://billdog.io/docs/server-sdk) |
+| AI coding agents (MCP) | [billdog-mcp](https://github.com/billdogai/billdog-mcp) | [MCP server](https://billdog.io/docs/mcp-server) |
+
+Not sure which one you need? See [choosing an SDK](https://billdog.io/docs/sdk-selection).
 
 ## 📄 License
 
